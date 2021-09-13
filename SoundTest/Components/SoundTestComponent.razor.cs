@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using static SoundTest.Constants;
 
@@ -17,12 +16,9 @@ namespace SoundTest.Components
             set
             {
                 type = value;
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 SetParameters();
-                //if (isPlaying)
-                //{
-                //    StopPlaying();
-                //    StartPlaying();
-                //}
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
         }
 
@@ -37,47 +33,14 @@ namespace SoundTest.Components
                     > MaxFrequency => MaxFrequency,
                     _ => value,
                 };
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 SetParameters();
-                //if (isPlaying)
-                //{
-                //    StopPlaying();
-                //    StartPlaying();
-                //}
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
         }
 
         protected override async Task OnInitializedAsync() =>
             await JsInterop.InitializeSoundGenerator();
-
-        //private async Task OnChangeType(ChangeEventArgs e)
-        //{
-        //    type = int.TryParse(e.Value?.ToString(), out int newTypeInt)
-        //        ? newTypeInt switch
-        //        {
-        //            (int)Types.Sine or (int)Types.Square or (int)Types.Triangle or (int)Types.Sawtooth => (Types)newTypeInt,
-        //            _ => DefaultType,
-        //        }
-        //        : DefaultType;
-        //    await SetParameters();
-        //    if (isPlaying)
-        //    {
-        //        await StopPlaying();
-        //        await StartPlaying();
-        //    }
-        //}
-
-        //private async Task OnChangeFrequency(ChangeEventArgs e)
-        //{
-        //    frequency = int.TryParse(e.Value?.ToString(), out int newFrequency)
-        //        ? newFrequency
-        //        : DefaultFrequency;
-        //    await SetParameters();
-        //    if (isPlaying)
-        //    {
-        //        await StopPlaying();
-        //        await StartPlaying();
-        //    }
-        //}
 
         private async Task SetParameters() =>
             await JsInterop.SetParameters(Type.ToString().ToLower(), Frequency);

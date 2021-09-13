@@ -45,7 +45,16 @@ namespace SoundTest
 
         #endregion
 
-        public async Task GenerateSound(string type = "sine", int frequency = 440, int stopTime = 1) =>
-            await InvokeVoidAsync("generateSound", type, frequency, stopTime);
+        public async Task InitializeSoundGenerator() =>
+            await InvokeVoidAsync("initializeSoundGenerator");
+
+        public async Task SetParameters(string type = "sine", int frequency = 440) =>
+            await InvokeVoidAsync("setParameters", type, frequency);
+
+        public async Task StartPlaying() =>
+            await InvokeVoidAsync("startPlaying");
+
+        public async Task StopPlaying() =>
+            await InvokeVoidAsync("stopPlaying");
     }
 }

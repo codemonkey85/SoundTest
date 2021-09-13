@@ -1,0 +1,21 @@
+﻿@using static Constants
+
+<h3>Sound Test</h3>
+
+<div>
+    <label for="typeInput">Type</label>
+    <select id="typeInput" @bind="Type">
+        <option selected value="@Types.Sine">sine</option>
+        <option value="@Types.Square">square</option>
+        <option value="@Types.Triangle">triangle</option>
+        <option value="@Types.Sawtooth">sawtooth</option>
+    </select>
+</div>
+
+<div>
+    <label for="frequencyInput">Frequency</label>
+    <input id="frequencyInput" type="range" min="@Constants.MinFrequency" max="@Constants.MaxFrequency" @bind=Frequency @bind:event="oninput" />
+    <label>Frequency=@Frequency.ToString()</label>
+</div>
+
+<button @onclick="@(isPlaying ? StopPlaying : StartPlaying)">@(isPlaying ? "Stop" : "Play")</button>

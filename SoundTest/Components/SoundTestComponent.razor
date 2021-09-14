@@ -1,21 +1,39 @@
 ﻿@using static Constants
 
 <h3>Sound Test</h3>
-
 <div>
     <label for="typeInput">Type</label>
     <select id="typeInput" @bind="Type">
-        <option selected value="@Types.Sine">sine</option>
-        <option value="@Types.Square">square</option>
-        <option value="@Types.Triangle">triangle</option>
-        <option value="@Types.Sawtooth">sawtooth</option>
+        <option selected value="@Types.Sine">@Types.Sine.ToString()</option>
+        <option value="@Types.Square">@Types.Square.ToString()</option>
+        <option value="@Types.Triangle">@Types.Triangle.ToString()</option>
+        <option value="@Types.Sawtooth">@Types.Sawtooth.ToString()</option>
     </select>
 </div>
-
 <div>
     <label for="frequencyInput">Frequency</label>
-    <input id="frequencyInput" type="range" min="@Constants.MinFrequency" max="@Constants.MaxFrequency" @bind=Frequency @bind:event="oninput" />
+    <input id="frequencyInput"
+           type="range"
+           min="@Constants.MinFrequency"
+           max="@Constants.MaxFrequency"
+           @bind=Frequency
+           @bind:event="oninput" />
     <label>Frequency=@Frequency.ToString()</label>
 </div>
-
-<button @onclick="@(isPlaying ? StopPlaying : StartPlaying)">@(isPlaying ? "Stop" : "Play")</button>
+<div>
+    <button id="startStopButton"
+            class="btn btn-primary"
+            @onclick="@(isPlaying ? StopPlaying : StartPlaying)">
+        @(isPlaying ? "Stop" : "Start")
+    </button>
+</div>
+<div>
+    <label for="soundLink">Sound Link:</label>
+    <br />
+    <label id="soundLink">@SoundLink</label>
+    <button id="copySoundLinkButton"
+            class="btn btn-primary"
+            @onclick="CopySoundLink">
+        Copy
+    </button>
+</div>

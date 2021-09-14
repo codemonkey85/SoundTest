@@ -1,1 +1,14 @@
-﻿
+﻿#typeInput {
+}
+
+#frequencyInput {
+}
+
+#startStopButton {
+}
+
+#soundLink {
+    cursor: text;
+    border: 1px solid;
+    padding: 3px;
+}

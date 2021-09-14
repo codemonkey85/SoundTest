@@ -8,42 +8,20 @@ namespace SoundTest
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
-        #region Constructor / Destructor
-
-        public JsInterop(IJSRuntime jsRuntime)
-        {
-            moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-               "import", $"./JsInterop.js").AsTask());
-        }
+        public JsInterop(IJSRuntime jsRuntime) =>
+            moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", $"./JsInterop.js").AsTask());
 
         public async ValueTask DisposeAsync()
         {
             if (moduleTask.IsValueCreated)
             {
-                IJSObjectReference module = await GetModule();
+                IJSObjectReference module = await moduleTask.Value;
                 await module.DisposeAsync();
             }
         }
 
-        #endregion
-
-        #region Private methods
-
-        private async Task<IJSObjectReference> GetModule() => await moduleTask.Value;
-
-        private async Task<T> InvokeAsync<T>(string method, params object[] args)
-        {
-            IJSObjectReference module = await GetModule();
-            return await module.InvokeAsync<T>(method, args);
-        }
-
-        private async Task InvokeVoidAsync(string method, params object[] args)
-        {
-            IJSObjectReference module = await GetModule();
-            await module.InvokeVoidAsync(method, args);
-        }
-
-        #endregion
+        private async Task InvokeVoidAsync(string method, params object[] args) =>
+            await (await moduleTask.Value).InvokeVoidAsync(method, args);
 
         public async Task InitializeSoundGenerator() =>
             await InvokeVoidAsync("initializeSoundGenerator");
@@ -56,5 +34,8 @@ namespace SoundTest
 
         public async Task StopPlaying() =>
             await InvokeVoidAsync("stopPlaying");
+
+        public async Task CopyTextToClipboard(string textToCopy) =>
+            await InvokeVoidAsync("copyTextToClipboard", textToCopy);
     }
 }

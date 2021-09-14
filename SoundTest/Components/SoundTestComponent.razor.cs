@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using static SoundTest.Constants;
 
@@ -10,7 +11,8 @@ namespace SoundTest.Components
         private Types type = DefaultType;
         private int frequency = DefaultFrequency;
 
-        private Types Type
+        [Parameter]
+        public Types Type
         {
             get => type;
             set
@@ -22,7 +24,8 @@ namespace SoundTest.Components
             }
         }
 
-        private int Frequency
+        [Parameter]
+        public int Frequency
         {
             get => frequency;
             set
@@ -39,7 +42,9 @@ namespace SoundTest.Components
             }
         }
 
-        protected override async Task OnInitializedAsync() =>
+        private string SoundLink => $"{Navigation.BaseUri}?{nameof(type)}={type}&{nameof(frequency)}={frequency}";
+
+        protected override async Task OnParametersSetAsync() =>
             await JsInterop.InitializeSoundGenerator();
 
         private async Task SetParameters() =>
@@ -56,5 +61,8 @@ namespace SoundTest.Components
             await JsInterop.StopPlaying();
             isPlaying = false;
         }
+
+        private async Task CopySoundLink() =>
+            await JsInterop.CopyTextToClipboard(SoundLink);
     }
 }

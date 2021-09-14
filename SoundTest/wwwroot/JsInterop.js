@@ -1,6 +1,5 @@
 ﻿var context = null;
 var osc = null;
-
 var oscType = null;
 var oscFreq = null;
 
@@ -29,4 +28,13 @@ export function stopPlaying() {
     osc.stop(context.currentTime);
     osc.disconnect(context.destination);
     osc = null;
+}
+
+export function copyTextToClipboard(textToCopy) {
+    navigator.clipboard.writeText(textToCopy).then(function () {
+        alert("Copied to clipboard!");
+    })
+        .catch(function (error) {
+            alert(error);
+        });
 }

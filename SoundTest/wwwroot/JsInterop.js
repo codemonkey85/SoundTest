@@ -3,10 +3,6 @@ var osc = null;
 var oscType = null;
 var oscFreq = null;
 
-export function initializeSoundGenerator() {
-    context = new (window.AudioContext || window.webkitAudioContext)();
-}
-
 export function setParameters(type = 'sine', frequency = 440) {
     oscType = type ?? 'sine';
     oscFreq = frequency ?? 440;
@@ -17,6 +13,7 @@ export function setParameters(type = 'sine', frequency = 440) {
 }
 
 export function startPlaying() {
+    context = new (window.AudioContext || window.webkitAudioContext)();
     osc = context.createOscillator();
     osc.type = oscType ?? 'sine';
     osc.frequency.value = oscFreq ?? 440;
@@ -28,6 +25,7 @@ export function stopPlaying() {
     osc.stop(context.currentTime);
     osc.disconnect(context.destination);
     osc = null;
+    context = null;
 }
 
 export function copyTextToClipboard(textToCopy) {

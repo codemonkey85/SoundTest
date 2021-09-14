@@ -44,9 +44,6 @@ namespace SoundTest.Components
 
         private string SoundLink => $"{Navigation.BaseUri}?{nameof(type)}={type}&{nameof(frequency)}={frequency}";
 
-        protected override async Task OnParametersSetAsync() =>
-            await JsInterop.InitializeSoundGenerator();
-
         private async Task SetParameters() =>
             await JsInterop.SetParameters(Type.ToString().ToLower(), Frequency);
 

@@ -23,9 +23,6 @@ namespace SoundTest
         private async Task InvokeVoidAsync(string method, params object[] args) =>
             await (await moduleTask.Value).InvokeVoidAsync(method, args);
 
-        public async Task InitializeSoundGenerator() =>
-            await InvokeVoidAsync("initializeSoundGenerator");
-
         public async Task SetParameters(string type = "sine", int frequency = 440) =>
             await InvokeVoidAsync("setParameters", type, frequency);
 

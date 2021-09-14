@@ -1,15 +1,12 @@
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
-using static SoundTest.Constants;
-
 namespace SoundTest.Components
 {
-    public partial class SoundTestComponent
+    public partial class SoundComponent
     {
         private bool isPlaying = false;
+        private string? soundLink;
 
-        private Types type = DefaultType;
-        private int frequency = DefaultFrequency;
+        private Types type;
+        private int frequency;
 
         [Parameter]
         public Types Type
@@ -21,6 +18,7 @@ namespace SoundTest.Components
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 SetParameters();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                UpdateUri();
             }
         }
 
@@ -39,10 +37,19 @@ namespace SoundTest.Components
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 SetParameters();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                UpdateUri();
             }
         }
 
-        private string SoundLink => $"{Navigation.BaseUri}?{nameof(type)}={type}&{nameof(frequency)}={frequency}";
+        private void UpdateUri()
+        {
+            string? uri = Navigation.GetUriWithQueryParameters(new Dictionary<string, object>()
+            {
+                [nameof(type)] = (int)type,
+                [nameof(frequency)] = frequency,
+            });
+            soundLink = uri.ToString();
+        }
 
         private async Task SetParameters() =>
             await JsInterop.SetParameters(Type.ToString().ToLower(), Frequency);
@@ -60,6 +67,6 @@ namespace SoundTest.Components
         }
 
         private async Task CopySoundLink() =>
-            await JsInterop.CopyTextToClipboard(SoundLink);
+            await JsInterop.CopyTextToClipboard(soundLink);
     }
 }

@@ -1,10 +1,11 @@
-﻿@using static Constants
+﻿@using static SoundTest.Constants
 
 <h3>Sound Test</h3>
 <div>
     <label for="typeInput">Type</label>
-    <select id="typeInput" @bind="Type">
-        <option selected value="@Types.Sine">@Types.Sine.ToString()</option>
+    <select id="typeInput" 
+    @bind="Type">
+        <option value="@Types.Sine">@Types.Sine.ToString()</option>
         <option value="@Types.Square">@Types.Square.ToString()</option>
         <option value="@Types.Triangle">@Types.Triangle.ToString()</option>
         <option value="@Types.Sawtooth">@Types.Sawtooth.ToString()</option>

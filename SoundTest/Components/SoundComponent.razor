@@ -3,8 +3,8 @@
 <h3>Sound Test</h3>
 <div>
     <label for="typeInput">Type</label>
-    <select id="typeInput" 
-    @bind="Type">
+    <select id="typeInput"
+            @bind="Type">
         <option value="@Types.Sine">@Types.Sine.ToString()</option>
         <option value="@Types.Square">@Types.Square.ToString()</option>
         <option value="@Types.Triangle">@Types.Triangle.ToString()</option>
@@ -31,7 +31,7 @@
 <div>
     <label for="soundLink">Sound Link:</label>
     <br />
-    <label id="soundLink">@SoundLink</label>
+    <label id="soundLink">@soundLink</label>
     <button id="copySoundLinkButton"
             class="btn btn-primary"
             @onclick="CopySoundLink">

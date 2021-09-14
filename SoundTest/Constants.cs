@@ -10,6 +10,8 @@
 
         public const Types DefaultType = Types.Sine;
 
+        public static string DefaultHomeHref = $"/?type={DefaultType}&frequency={DefaultFrequency}";
+
         public enum Types
         {
             Sine,

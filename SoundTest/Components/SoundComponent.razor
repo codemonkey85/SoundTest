@@ -6,10 +6,10 @@
     <label for="typeInput">Type</label>
     <select id="typeInput"
             @bind="Type">
-        <option value="@Types.Sine">@Types.Sine.ToString()</option>
-        <option value="@Types.Square">@Types.Square.ToString()</option>
-        <option value="@Types.Triangle">@Types.Triangle.ToString()</option>
-        <option value="@Types.Sawtooth">@Types.Sawtooth.ToString()</option>
+        @foreach (Types type in Enum.GetValues<Types>())
+        {
+            <option value="@type">@type.ToString()</option>
+        }
     </select>
 </div>
 <div>

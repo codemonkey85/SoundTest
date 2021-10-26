@@ -28,7 +28,8 @@
     }
 
 .top-row {
-    background-color: #f7f7f7;
+    background-color: var(--background);
+    color: var(--font-color);
     border-bottom: 1px solid #d6d5d5;
     justify-content: flex-end;
     height: 3.5rem;

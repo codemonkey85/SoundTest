@@ -41,9 +41,23 @@ public partial class SoundComponent
         }
     }
 
+    private JsInterop? jsInterop;
+
+    private JsInterop JsInterop
+    {
+        get
+        {
+            if (jsInterop == null)
+            {
+                jsInterop = new JsInterop(JSRuntime, $"./{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
+            }
+            return jsInterop;
+        }
+    }
+
     private void UpdateUri()
     {
-        string? uri = Navigation.GetUriWithQueryParameters(new Dictionary<string, object>()
+        string? uri = Navigation.GetUriWithQueryParameters(new Dictionary<string, object?>()
         {
             [nameof(type)] = (int)type,
             [nameof(frequency)] = frequency,
@@ -52,20 +66,26 @@ public partial class SoundComponent
     }
 
     private async Task SetParameters() =>
-        await JsInterop.SetParameters(Type.ToString().ToLower(), Frequency);
+        await JsInterop.InvokeVoidAsync("setParameters", Type.ToString().ToLower(), Frequency);
 
     private async Task StartPlaying()
     {
-        await JsInterop.StartPlaying();
+        await JsInterop.InvokeVoidAsync("startPlaying");
         isPlaying = true;
     }
 
     private async Task StopPlaying()
     {
-        await JsInterop.StopPlaying();
+        await JsInterop.InvokeVoidAsync("stopPlaying");
         isPlaying = false;
     }
 
-    private async Task CopySoundLink() =>
-        await JsInterop.CopyTextToClipboard(soundLink);
+    private async Task CopySoundLink()
+    {
+        if (soundLink == null)
+        {
+            return;
+        }
+        await JsInterop.InvokeVoidAsync("copyTextToClipboard", soundLink);
+    }
 }

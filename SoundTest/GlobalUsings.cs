@@ -1,2 +1,2 @@
-﻿global using static SoundTest.Constants;
-global using Microsoft.AspNetCore.Components;
+﻿global using Microsoft.AspNetCore.Components;
+global using static SoundTest.Constants;

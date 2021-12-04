@@ -88,4 +88,11 @@ public partial class SoundComponent
         }
         await JsInterop.InvokeVoidAsync("copyTextToClipboard", soundLink);
     }
+    
+    private async Task SetComfortableTone()
+    {
+        Type = Types.Sine;
+        Frequency = 528;
+        await SetParameters();
+    }
 }

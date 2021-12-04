@@ -28,6 +28,9 @@
             @onclick="@(isPlaying ? StopPlaying : StartPlaying)">
         @(isPlaying ? "Stop" : "Start")
     </button>
+    <button id="comfortButton"
+                class="btn btn-secondary"
+                @onclick="SetComfortableTone">Comfortable Tone</button>
 </div>
 <div>
     <label for="soundLink">Sound Link:</label>

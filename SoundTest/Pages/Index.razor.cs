@@ -3,8 +3,14 @@
 public partial class Index
 {
     [Parameter, SupplyParameterFromQuery]
-    public int Type { get; set; }
+    public int Type
+    {
+        get; set;
+    }
 
     [Parameter, SupplyParameterFromQuery]
-    public int Frequency { get; set; }
+    public int Frequency
+    {
+        get; set;
+    }
 }

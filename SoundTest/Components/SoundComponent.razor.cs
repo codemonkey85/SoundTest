@@ -65,8 +65,10 @@ public partial class SoundComponent
         soundLink = uri.ToString();
     }
 
-    private async Task SetParameters() =>
+    private async Task SetParameters()
+    {
         await JsInterop.InvokeVoidAsync("setParameters", Type.ToString().ToLower(), Frequency);
+    }
 
     private async Task StartPlaying()
     {
@@ -88,7 +90,7 @@ public partial class SoundComponent
         }
         await JsInterop.InvokeVoidAsync("copyTextToClipboard", soundLink);
     }
-    
+
     private async Task SetComfortableTone()
     {
         Type = Types.Sine;

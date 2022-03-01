@@ -1,6 +1,4 @@
-﻿using Microsoft.JSInterop;
-
-namespace SoundTest;
+﻿namespace SoundTest;
 
 public class JsInterop : IAsyncDisposable
 {

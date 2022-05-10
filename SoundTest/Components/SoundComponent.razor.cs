@@ -15,9 +15,7 @@ public partial class SoundComponent
         set
         {
             type = value;
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            SetParameters();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            SetParametersAsync();
             UpdateUri();
         }
     }
@@ -34,9 +32,7 @@ public partial class SoundComponent
                 > MaxFrequency => MaxFrequency,
                 _ => value,
             };
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            SetParameters();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            SetParametersAsync();
             UpdateUri();
         }
     }
@@ -57,7 +53,7 @@ public partial class SoundComponent
 
     private void UpdateUri()
     {
-        string? uri = Navigation.GetUriWithQueryParameters(new Dictionary<string, object?>()
+        var uri = Navigation.GetUriWithQueryParameters(new Dictionary<string, object?>()
         {
             [nameof(type)] = (int)type,
             [nameof(frequency)] = frequency,
@@ -65,10 +61,7 @@ public partial class SoundComponent
         soundLink = uri.ToString();
     }
 
-    private async Task SetParameters()
-    {
-        await JsInterop.InvokeVoidAsync("setParameters", Type.ToString().ToLower(), Frequency);
-    }
+    private async Task SetParametersAsync() => await JsInterop.InvokeVoidAsync("setParameters", Type.ToString().ToLower(), Frequency);
 
     private async Task StartPlaying()
     {
@@ -95,6 +88,6 @@ public partial class SoundComponent
     {
         Type = Types.Sine;
         Frequency = 528;
-        await SetParameters();
+        await SetParametersAsync();
     }
 }

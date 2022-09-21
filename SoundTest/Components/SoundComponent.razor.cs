@@ -39,17 +39,7 @@ public partial class SoundComponent
 
     private JsInterop? jsInterop;
 
-    private JsInterop JsInterop
-    {
-        get
-        {
-            if (jsInterop == null)
-            {
-                jsInterop = new JsInterop(JSRuntime, $"./{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
-            }
-            return jsInterop;
-        }
-    }
+    private JsInterop JsInterop => jsInterop ??= new JsInterop(JSRuntime, $"./{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
 
     private void UpdateUri()
     {

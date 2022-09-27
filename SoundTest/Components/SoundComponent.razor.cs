@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace SoundTest.Components;
 
 public partial class SoundComponent
@@ -7,6 +9,8 @@ public partial class SoundComponent
 
     private Types type;
     private int frequency;
+
+    private bool IsJsInitialized = false;
 
     [Parameter]
     public Types Type
@@ -37,10 +41,6 @@ public partial class SoundComponent
         }
     }
 
-    private JsInterop? jsInterop;
-
-    private JsInterop JsInterop => jsInterop ??= new JsInterop(JSRuntime, $"./{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
-
     private void UpdateUri()
     {
         var uri = Navigation.GetUriWithQueryParameters(new Dictionary<string, object?>()
@@ -51,30 +51,58 @@ public partial class SoundComponent
         soundLink = uri.ToString();
     }
 
-    private async Task SetParametersAsync() => await JsInterop.InvokeVoidAsync("setParameters", Type.ToString().ToLower(), Frequency);
+    protected override async Task OnInitializedAsync() => await InitializeJs();
 
-    private async Task StartPlaying()
+    private async Task InitializeJs()
     {
-        await JsInterop.InvokeVoidAsync("startPlaying");
+        if (OperatingSystem.IsBrowser() && !IsJsInitialized)
+        {
+            try
+            {
+                var result = await JSHost.ImportAsync("soundtest.js", $"../{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
+                if (result is not null)
+                {
+                    IsJsInitialized = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+    }
+
+    private async Task SetParametersAsync()
+    {
+        if (!IsJsInitialized)
+        {
+            await InitializeJs();
+        }
+        JsInterop.SetParameters(Type.ToString().ToLower(), Frequency);
+    }
+
+    private void StartPlaying()
+    {
+        JsInterop.StartPlaying();
         isPlaying = true;
     }
 
-    private async Task StopPlaying()
+    private void StopPlaying()
     {
-        await JsInterop.InvokeVoidAsync("stopPlaying");
+        JsInterop.StopPlaying();
         isPlaying = false;
     }
 
-    private async Task CopySoundLink()
+    private void CopySoundLink()
     {
         if (soundLink == null)
         {
             return;
         }
-        await JsInterop.InvokeVoidAsync("copyTextToClipboard", soundLink);
+        JsInterop.CopyTextToClipboard(soundLink);
     }
 
-    private async Task SetComfortableTone()
+    private async Task SetComfortableToneAsync()
     {
         Type = Types.Sine;
         Frequency = 528;

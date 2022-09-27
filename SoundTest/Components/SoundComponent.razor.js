@@ -3,7 +3,7 @@ var osc = null;
 var oscType = null;
 var oscFreq = null;
 
-export function setParameters(type = 'sine', frequency = 440) {
+export function SetParameters(type = 'sine', frequency = 440) {
     oscType = type ?? 'sine';
     oscFreq = frequency ?? 440;
     if (osc !== null) {
@@ -12,7 +12,7 @@ export function setParameters(type = 'sine', frequency = 440) {
     }
 }
 
-export function startPlaying() {
+export function StartPlaying() {
     context = new (window.AudioContext || window.webkitAudioContext)();
     osc = context.createOscillator();
     osc.type = oscType ?? 'sine';
@@ -21,14 +21,14 @@ export function startPlaying() {
     osc.connect(context.destination);
 }
 
-export function stopPlaying() {
+export function StopPlaying() {
     osc.stop(context.currentTime);
     osc.disconnect(context.destination);
     osc = null;
     context = null;
 }
 
-export function copyTextToClipboard(textToCopy) {
+export function CopyTextToClipboard(textToCopy) {
     navigator.clipboard.writeText(textToCopy).then(function () {
         alert("Copied to clipboard!");
     })

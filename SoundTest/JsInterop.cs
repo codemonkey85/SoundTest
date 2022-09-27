@@ -1,24 +1,16 @@
 ﻿namespace SoundTest;
 
-public class JsInterop : IAsyncDisposable
+public partial class JsInterop
 {
-    private readonly Lazy<Task<IJSObjectReference>> moduleTask;
+    [JSImport(nameof(SetParameters), "soundtest.js")]
+    public static partial void SetParameters(string type, int frequency);
 
-    public JsInterop(IJSRuntime jsRuntime, string jsFilePath) =>
-        moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", jsFilePath).AsTask());
+    [JSImport(nameof(StartPlaying), "soundtest.js")]
+    public static partial void StartPlaying();
 
-    public async ValueTask DisposeAsync()
-    {
-        if (moduleTask.IsValueCreated)
-        {
-            var module = await moduleTask.Value;
-            await module.DisposeAsync();
-        }
-    }
+    [JSImport(nameof(StopPlaying), "soundtest.js")]
+    public static partial void StopPlaying();
 
-    public async Task InvokeAsync<ReturnType>(string method, params object[] args) =>
-        await (await moduleTask.Value).InvokeAsync<ReturnType>(method, args);
-
-    public async Task InvokeVoidAsync(string method, params object[] args) =>
-        await (await moduleTask.Value).InvokeVoidAsync(method, args);
+    [JSImport(nameof(CopyTextToClipboard), "soundtest.js")]
+    public static partial void CopyTextToClipboard(string text);
 }

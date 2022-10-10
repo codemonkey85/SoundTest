@@ -1,24 +1,24 @@
-using System.Diagnostics;
+#pragma warning disable CS4014
 
 namespace SoundTest.Components;
 
 public partial class SoundComponent
 {
-    private bool isPlaying = false;
-    private string? soundLink;
+    private bool _isPlaying = false;
+    private string? _soundLink;
 
-    private Types type;
-    private int frequency;
+    private Types _type;
+    private int _frequency;
 
-    private bool IsJsInitialized = false;
+    private bool _isJsInitialized = false;
 
     [Parameter]
     public Types Type
     {
-        get => type;
+        get => _type;
         set
         {
-            type = value;
+            _type = value;
             SetParametersAsync();
             UpdateUri();
         }
@@ -27,10 +27,10 @@ public partial class SoundComponent
     [Parameter]
     public int Frequency
     {
-        get => frequency;
+        get => _frequency;
         set
         {
-            frequency = value switch
+            _frequency = value switch
             {
                 < MinFrequency => MinFrequency,
                 > MaxFrequency => MaxFrequency,
@@ -45,25 +45,23 @@ public partial class SoundComponent
     {
         var uri = Navigation.GetUriWithQueryParameters(new Dictionary<string, object?>()
         {
-            [nameof(type)] = (int)type,
-            [nameof(frequency)] = frequency,
+            [nameof(_type)] = (int)_type,
+            [nameof(_frequency)] = _frequency,
         });
-        soundLink = uri.ToString();
+        _soundLink = uri;
     }
 
     protected override async Task OnInitializedAsync() => await InitializeJs();
 
     private async Task InitializeJs()
     {
-        if (OperatingSystem.IsBrowser() && !IsJsInitialized)
+        if (OperatingSystem.IsBrowser() && !_isJsInitialized)
         {
             try
             {
-                var result = await JSHost.ImportAsync("soundtest.js", $"../{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
-                if (result is not null)
-                {
-                    IsJsInitialized = true;
-                }
+                await JSHost.ImportAsync("soundtest.js",
+                    $"../{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
+                _isJsInitialized = true;
             }
             catch (Exception ex)
             {
@@ -74,32 +72,34 @@ public partial class SoundComponent
 
     private async Task SetParametersAsync()
     {
-        if (!IsJsInitialized)
+        if (!_isJsInitialized)
         {
             await InitializeJs();
         }
+
         JsInterop.SetParameters(Type.ToString().ToLower(), Frequency);
     }
 
     private void StartPlaying()
     {
         JsInterop.StartPlaying();
-        isPlaying = true;
+        _isPlaying = true;
     }
 
     private void StopPlaying()
     {
         JsInterop.StopPlaying();
-        isPlaying = false;
+        _isPlaying = false;
     }
 
     private void CopySoundLink()
     {
-        if (soundLink == null)
+        if (_soundLink == null)
         {
             return;
         }
-        JsInterop.CopyTextToClipboard(soundLink);
+
+        JsInterop.CopyTextToClipboard(_soundLink);
     }
 
     private async Task SetComfortableToneAsync()

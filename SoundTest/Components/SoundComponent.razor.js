@@ -3,19 +3,20 @@ var osc = null;
 var oscType = null;
 var oscFreq = null;
 
-export function SetParameters(type = 'sine', frequency = 440) {
-    oscType = type ?? 'sine';
+export function SetParameters(type = "sine", frequency = 440) {
+    oscType = type ?? "sine";
     oscFreq = frequency ?? 440;
     if (osc !== null) {
-        osc.type = oscType ?? 'sine';
+        osc.type = oscType ?? "sine";
         osc.frequency.value = oscFreq ?? 440;
     }
 }
 
 export function StartPlaying() {
+    // ReSharper disable once PossiblyUnassignedProperty
     context = new (window.AudioContext || window.webkitAudioContext)();
     osc = context.createOscillator();
-    osc.type = oscType ?? 'sine';
+    osc.type = oscType ?? "sine";
     osc.frequency.value = oscFreq ?? 440;
     osc.start();
     osc.connect(context.destination);

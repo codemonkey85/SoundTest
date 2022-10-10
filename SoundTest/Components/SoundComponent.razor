@@ -6,9 +6,9 @@
     <label for="typeInput">Type</label>
     <select id="typeInput"
             @bind="Type">
-        @foreach (Types type in Enum.GetValues<Types>())
+        @foreach (var t in Enum.GetValues<Types>())
         {
-            <option value="@type">@type.ToString()</option>
+            <option value="@t">@t.ToString()</option>
         }
     </select>
 </div>
@@ -16,26 +16,28 @@
     <label for="frequencyInput">Frequency</label>
     <input id="frequencyInput"
            type="range"
-           min="@Constants.MinFrequency"
-           max="@Constants.MaxFrequency"
-           @bind=Frequency
+           min="@MinFrequency"
+           max="@MaxFrequency"
+           @bind="Frequency"
            @bind:event="oninput" />
     <label>Frequency=@Frequency.ToString()</label>
 </div>
 <div>
     <button id="startStopButton"
             class="btn btn-primary"
-            @onclick="@(isPlaying ? StopPlaying : StartPlaying)">
-        @(isPlaying ? "Stop" : "Start")
+            @onclick="@(_isPlaying ? StopPlaying : StartPlaying)">
+        @(_isPlaying ? "Stop" : "Start")
     </button>
     <button id="comfortButton"
-                class="btn btn-secondary"
-                @onclick="SetComfortableToneAsync">Comfortable Tone</button>
+            class="btn btn-secondary"
+            @onclick="SetComfortableToneAsync">
+        Comfortable Tone
+    </button>
 </div>
 <div>
     <label for="soundLink">Sound Link:</label>
     <br />
-    <label id="soundLink">@soundLink</label>
+    <label id="soundLink">@_soundLink</label>
     <button id="copySoundLinkButton"
             class="btn btn-primary"
             @onclick="CopySoundLink">

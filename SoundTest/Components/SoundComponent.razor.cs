@@ -1,67 +1,73 @@
+#pragma warning disable BL0007
 #pragma warning disable CS4014
+#pragma warning disable IDE0058
 
 namespace SoundTest.Components;
 
 public partial class SoundComponent
 {
-    private bool _isPlaying = false;
-    private string? _soundLink;
+    private bool isPlaying = false;
+    private string? soundLink;
 
-    private Types _type;
-    private int _frequency;
+    private Types type;
+    private int frequency;
 
-    private bool _isJsInitialized = false;
+    private bool isJsInitialized = false;
 
     [Parameter]
     public Types Type
     {
-        get => _type;
+        get => type;
         set
         {
-            _type = value;
-            SetParametersAsync();
-            UpdateUri();
+            type = value;
+            SetParametersAndUpdateAsync();
         }
     }
 
     [Parameter]
     public int Frequency
     {
-        get => _frequency;
+        get => frequency;
         set
         {
-            _frequency = value switch
+            frequency = value switch
             {
                 < MinFrequency => MinFrequency,
                 > MaxFrequency => MaxFrequency,
                 _ => value,
             };
-            SetParametersAsync();
-            UpdateUri();
+            SetParametersAndUpdateAsync();
         }
+    }
+
+    private async Task SetParametersAndUpdateAsync()
+    {
+        await SetParametersAsync();
+        UpdateUri();
     }
 
     private void UpdateUri()
     {
         var uri = Navigation.GetUriWithQueryParameters(new Dictionary<string, object?>()
         {
-            [nameof(_type)] = (int)_type,
-            [nameof(_frequency)] = _frequency,
+            [nameof(type)] = (int)type,
+            [nameof(frequency)] = frequency,
         });
-        _soundLink = uri;
+        soundLink = uri;
     }
 
     protected override async Task OnInitializedAsync() => await InitializeJs();
 
     private async Task InitializeJs()
     {
-        if (OperatingSystem.IsBrowser() && !_isJsInitialized)
+        if (OperatingSystem.IsBrowser() && !isJsInitialized)
         {
             try
             {
                 await JSHost.ImportAsync("soundtest.js",
                     $"../{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
-                _isJsInitialized = true;
+                isJsInitialized = true;
             }
             catch (Exception ex)
             {
@@ -72,7 +78,7 @@ public partial class SoundComponent
 
     private async Task SetParametersAsync()
     {
-        if (!_isJsInitialized)
+        if (!isJsInitialized)
         {
             await InitializeJs();
         }
@@ -83,23 +89,23 @@ public partial class SoundComponent
     private void StartPlaying()
     {
         JsInterop.StartPlaying();
-        _isPlaying = true;
+        isPlaying = true;
     }
 
     private void StopPlaying()
     {
         JsInterop.StopPlaying();
-        _isPlaying = false;
+        isPlaying = false;
     }
 
     private void CopySoundLink()
     {
-        if (_soundLink == null)
+        if (soundLink == null)
         {
             return;
         }
 
-        JsInterop.CopyTextToClipboard(_soundLink);
+        JsInterop.CopyTextToClipboard(soundLink);
     }
 
     private async Task SetComfortableToneAsync()
@@ -109,3 +115,7 @@ public partial class SoundComponent
         await SetParametersAsync();
     }
 }
+
+#pragma warning restore BL0007
+#pragma warning restore CS4014
+#pragma warning restore IDE0058

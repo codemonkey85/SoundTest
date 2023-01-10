@@ -1,7 +1,6 @@
-@using static SoundTest.Constants
-
 <PageTitle>Sound Test</PageTitle>
 <h3>Sound Test</h3>
+
 <div>
     <label for="typeInput">Type</label>
     <select id="typeInput"
@@ -12,6 +11,7 @@
         }
     </select>
 </div>
+
 <div>
     <label for="frequencyInput">Frequency</label>
     <input id="frequencyInput"
@@ -22,11 +22,12 @@
            @bind:event="oninput" />
     <label>Frequency=@Frequency.ToString()</label>
 </div>
+
 <div>
     <button id="startStopButton"
             class="btn btn-primary"
-            @onclick="@(_isPlaying ? StopPlaying : StartPlaying)">
-        @(_isPlaying ? "Stop" : "Start")
+            @onclick="@(isPlaying ? StopPlaying : StartPlaying)">
+        @(isPlaying ? "Stop" : "Start")
     </button>
     <button id="comfortButton"
             class="btn btn-secondary"
@@ -34,10 +35,11 @@
         Comfortable Tone
     </button>
 </div>
+
 <div>
     <label for="soundLink">Sound Link:</label>
     <br />
-    <label id="soundLink">@_soundLink</label>
+    <label id="soundLink">@soundLink</label>
     <button id="copySoundLinkButton"
             class="btn btn-primary"
             @onclick="CopySoundLink">

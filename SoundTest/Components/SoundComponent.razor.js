@@ -40,20 +40,19 @@ export function CopyTextToClipboard(textToCopy) {
 
 export async function GetAudioOutputDevices() {
     var devices = [];
-    var audioOutputDevices = [];
 
-    devices = await navigator.mediaDevices.enumerateDevices()
-    devices.forEach(device => {
-        if (device.kind === 'audiooutput') // && device.deviceId !== 'default' && device.deviceId !== 'communications')
-            //console.log(device);
-            audioOutputDevices.push({
-                "deviceId": device.deviceId,
-                "label": device.label,
-                "groupId": device.groupId
-            });
-    });
+    devices = (await navigator.mediaDevices.enumerateDevices()).filter(function (entry) {
+        return entry.kind === 'audiooutput' && entry.deviceId !== null && entry.deviceId !== "";
+    });;
 
-    return audioOutputDevices;
+    if (devices === null || devices.length === 0) {
+        await navigator.mediaDevices.getUserMedia({ audio: true });
+        devices = (await navigator.mediaDevices.enumerateDevices()).filter(function (entry) {
+            return entry.kind === 'audiooutput' && entry.deviceId !== null && entry.deviceId !== "";
+        });;
+    }
+
+    return devices;
 }
 
 export function SetAudioDevice(deviceId) {

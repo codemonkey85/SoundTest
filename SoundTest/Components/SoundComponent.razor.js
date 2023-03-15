@@ -37,3 +37,26 @@ export function CopyTextToClipboard(textToCopy) {
             alert(error);
         });
 }
+
+export async function GetAudioOutputDevices() {
+    var devices = [];
+    var audioOutputDevices = [];
+
+    devices = await navigator.mediaDevices.enumerateDevices()
+    devices.forEach(device => {
+        if (device.kind === 'audiooutput') // && device.deviceId !== 'default' && device.deviceId !== 'communications')
+            //console.log(device);
+            audioOutputDevices.push({
+                "deviceId": device.deviceId,
+                "label": device.label,
+                "groupId": device.groupId
+            });
+    });
+
+    return audioOutputDevices;
+}
+
+export function SetAudioDevice(deviceId) {
+    console.log(`setting device to ${deviceId}`)
+    context.setSinkId(deviceId);
+}

@@ -36,6 +36,32 @@
     </button>
 </div>
 
+@if (AudioDevices is { Count: > 0 })
+{
+    <div>
+        <select @bind="@SelectedDeviceId" @bind:after="@AudioDeviceChanged">
+            @foreach (var device in AudioDevices)
+            {
+                if (device is { DeviceId: not null, Label: not null })
+                {
+                    if (device.IsDefault is true)
+                    {
+                        <option value="@device.DeviceId" selected>
+                            @device.Label
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="@device.DeviceId">
+                            @device.Label
+                        </option>
+                    }
+                }
+            }
+        </select>
+    </div>
+}
+
 <div>
     <label for="soundLink">Sound Link:</label>
     <br />

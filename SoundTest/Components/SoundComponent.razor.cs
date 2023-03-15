@@ -2,6 +2,8 @@
 #pragma warning disable CS4014
 #pragma warning disable IDE0058
 
+using Microsoft.JSInterop;
+
 namespace SoundTest.Components;
 
 public partial class SoundComponent
@@ -12,7 +14,12 @@ public partial class SoundComponent
     private Types type;
     private int frequency;
 
+    private IJSObjectReference? module;
     private bool isJsInitialized = false;
+
+    private List<AudioDevice>? AudioDevices { get; set; }
+
+    private string? SelectedDeviceId { get; set; }
 
     [Parameter]
     public Types Type
@@ -67,7 +74,11 @@ public partial class SoundComponent
             {
                 await JSHost.ImportAsync("soundtest.js",
                     $"../{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
+                module = await JsRuntime.InvokeAsync<IJSObjectReference>(
+                    "import", $"../{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
                 isJsInitialized = true;
+
+                AudioDevices = await GetAudioOutputDevices();
             }
             catch (Exception ex)
             {
@@ -113,6 +124,77 @@ public partial class SoundComponent
         Type = Types.Sine;
         Frequency = 528;
         await SetParametersAsync();
+    }
+
+    private async Task<List<AudioDevice>?> GetAudioOutputDevices()
+    {
+        if (module is null)
+        {
+            return null;
+        }
+
+        var devices = (await module.GetAudioOutputDevices()).ToList();
+        if (devices is null)
+        {
+            return null;
+        }
+
+        devices = devices
+            .OrderBy(device => device.Label)
+            .ThenBy(device => device.GroupId)
+            .Except(devices.Where(device =>
+                device is { DeviceId: null } ||
+                device.DeviceId.Equals("communications", StringComparison.OrdinalIgnoreCase)))
+            .ToList();
+
+        var defaultGroupId = devices
+            .Where(device =>
+                device is { DeviceId: not null } &&
+                device.DeviceId.Equals("default", StringComparison.OrdinalIgnoreCase))
+            .Select(device => device.GroupId)
+            .FirstOrDefault();
+
+        devices = devices
+            .Except(devices.Where(device =>
+                device is { DeviceId: null } ||
+                device.DeviceId.Equals("default", StringComparison.OrdinalIgnoreCase)))
+            .ToList();
+
+        AudioDevice? defaultDevice = null;
+
+        foreach (var device in devices)
+        {
+            if (device is { GroupId: not null } && device.GroupId.Equals(defaultGroupId, StringComparison.OrdinalIgnoreCase))
+            {
+                defaultDevice = device;
+                break;
+            }
+        }
+
+        if (defaultDevice is not null)
+        {
+            var index = devices.IndexOf(defaultDevice);
+            devices[index] = devices[index] with { IsDefault = true };
+        }
+
+        return devices;
+    }
+
+    private async Task SetAudioDevice(string deviceId)
+    {
+        if (module is null)
+        {
+            return;
+        }
+        await module.SetAudioDevice(deviceId);
+    }
+
+    private void AudioDeviceChanged()
+    {
+        if (SelectedDeviceId is not null)
+        {
+            SetAudioDevice(SelectedDeviceId);
+        }
     }
 }
 

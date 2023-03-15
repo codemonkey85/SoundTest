@@ -78,7 +78,7 @@ public partial class SoundComponent
                     "import", $"../{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
                 isJsInitialized = true;
 
-                AudioDevices = await GetAudioOutputDevices();
+                //AudioDevices = await GetAudioOutputDevices();
             }
             catch (Exception ex)
             {

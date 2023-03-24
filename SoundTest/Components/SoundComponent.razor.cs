@@ -3,6 +3,7 @@
 #pragma warning disable IDE0058
 
 using Microsoft.JSInterop;
+using MudBlazor;
 
 namespace SoundTest.Components;
 
@@ -117,6 +118,8 @@ public partial class SoundComponent
         }
 
         JsInterop.CopyTextToClipboard(soundLink);
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        Snackbar.Add("Sound link copied to clipboard");
     }
 
     private async Task SetComfortableToneAsync()

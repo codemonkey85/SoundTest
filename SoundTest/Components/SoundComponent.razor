@@ -1,44 +1,43 @@
-<PageTitle>Sound Test</PageTitle>
-<h3>Sound Test</h3>
+<PageTitle>
+    Sound Test
+</PageTitle>
 
-<div>
-    <label for="typeInput">Type</label>
-    <select id="typeInput"
-            @bind="Type">
+<MudContainer>
+    <MudSelect T="Types"
+               @bind-Value="@Type"
+               Label="Sound Type">
         @foreach (var t in Enum.GetValues<Types>())
         {
-            <option value="@t">@t.ToString()</option>
+            <MudSelectItem Value="t" />
         }
-    </select>
-</div>
+    </MudSelect>
+</MudContainer>
 
-<div>
-    <label for="frequencyInput">Frequency</label>
-    <input id="frequencyInput"
-           type="range"
-           min="@MinFrequency"
-           max="@MaxFrequency"
-           @bind="Frequency"
-           @bind:event="oninput" />
-    <label>Frequency=@Frequency.ToString()</label>
-</div>
+<MudContainer>
+    <MudSlider @bind-Value="@Frequency"
+               Variant="Variant.Filled"
+               Min="@MinFrequency"
+               Max="@MaxFrequency">
+        Frequency = @Frequency.ToString()
+    </MudSlider>
+</MudContainer>
 
-<div>
-    <button id="startStopButton"
-            class="btn btn-primary"
-            @onclick="@(isPlaying ? StopPlaying : StartPlaying)">
+<MudContainer>
+    <MudButton Variant="Variant.Filled"
+               Color="Color.Primary"
+               OnClick="@(isPlaying ? StopPlaying : StartPlaying)">
         @(isPlaying ? "Stop" : "Start")
-    </button>
-    <button id="comfortButton"
-            class="btn btn-secondary"
-            @onclick="SetComfortableToneAsync">
+    </MudButton>
+    <MudButton Variant="Variant.Filled"
+               Color="Color.Secondary"
+               OnClick="SetComfortableToneAsync">
         Comfortable Tone
-    </button>
-</div>
+    </MudButton>
+</MudContainer>
 
 @if (AudioDevices is { Count: > 0 })
 {
-    <div>
+    <MudContainer>
         <select @bind="@SelectedDeviceId" @bind:after="@AudioDeviceChanged">
             @foreach (var device in AudioDevices)
             {
@@ -59,16 +58,15 @@
                 }
             }
         </select>
-    </div>
+    </MudContainer>
 }
 
-<div>
-    <label for="soundLink">Sound Link:</label>
-    <br />
-    <label id="soundLink">@soundLink</label>
-    <button id="copySoundLinkButton"
-            class="btn btn-primary"
-            @onclick="CopySoundLink">
-        Copy
-    </button>
-</div>
+<MudContainer>
+    <MudTextField @bind-Value="@soundLink"
+                  ReadOnly="@true"
+                  Label="Sound Link"
+                  Variant="Variant.Outlined"
+                  Adornment="Adornment.End"
+                  AdornmentIcon="@Icons.Material.Filled.ContentCopy"
+                  OnAdornmentClick=@CopySoundLink />
+</MudContainer>

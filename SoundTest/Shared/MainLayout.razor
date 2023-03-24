@@ -1,19 +1,23 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <a href="https://github.com/codemonkey85/SoundTest"
-           target="_blank"
-           class="ml-md-auto">About</a>
-    </div>
-    <div class="main">
-        <div class="top-row px-4">
-            <a href="https://github.com/codemonkey85/SoundTest"
-               target="_blank"
-               class="ml-md-auto">About</a>
-        </div>
-        <div class="content px-4">
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar>
+        <MudText>
+            SoundTest
+        </MudText>
+        <MudIconButton Icon="@Icons.Material.Filled.Info"
+                       Color="@Color.Inherit"
+                       Title="About"
+                       Href="https://github.com/codemonkey85/SoundTest"
+                       Target="_blank" />
+    </MudAppBar>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.False">
             @Body
-        </div>
-    </div>
-</div>
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>

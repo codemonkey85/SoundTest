@@ -30,9 +30,7 @@ export function StopPlaying() {
 }
 
 export function CopyTextToClipboard(textToCopy) {
-    navigator.clipboard.writeText(textToCopy).then(function () {
-        alert("Copied to clipboard!");
-    })
+    navigator.clipboard.writeText(textToCopy)
         .catch(function (error) {
             alert(error);
         });

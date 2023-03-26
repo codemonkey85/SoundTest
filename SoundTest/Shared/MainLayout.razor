@@ -1,6 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider />
+<MudThemeProvider @ref="@mudThemeProvider"
+                  @bind-IsDarkMode="@isDarkMode" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
@@ -14,6 +15,10 @@
                        Title="About"
                        Href="https://github.com/codemonkey85/SoundTest"
                        Target="_blank" />
+        <MudSpacer />
+        <MudSwitch @bind-Checked="@isDarkMode"
+                   Color="Color.Primary"
+                   Label="@(isDarkMode ? "Dark" : "Light")" />
     </MudAppBar>
     <MudMainContent>
         <MudContainer MaxWidth="MaxWidth.False">

@@ -1,6 +1,6 @@
-﻿namespace SoundTest.Pages;
+namespace SoundTest.Components.Pages;
 
-public partial class Index
+public partial class Home
 {
     [Parameter, SupplyParameterFromQuery]
     public int Type { get; set; }

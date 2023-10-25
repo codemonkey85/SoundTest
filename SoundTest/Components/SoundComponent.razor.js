@@ -1,4 +1,4 @@
-﻿var context = null;
+var context = null;
 var osc = null;
 var oscType = null;
 var oscFreq = null;

@@ -1,4 +1,4 @@
-namespace SoundTest.Shared;
+namespace SoundTest.Components.Layout;
 
 public partial class MainLayout
 {

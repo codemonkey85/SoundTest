@@ -3,7 +3,6 @@
 #pragma warning disable IDE0058
 
 using Microsoft.JSInterop;
-using MudBlazor;
 
 namespace SoundTest.Components;
 
@@ -199,6 +198,7 @@ public partial class SoundComponent
             SetAudioDevice(SelectedDeviceId);
         }
     }
+
 }
 
 #pragma warning restore BL0007

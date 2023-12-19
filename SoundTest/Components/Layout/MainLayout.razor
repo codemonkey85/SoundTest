@@ -7,12 +7,12 @@
 
 <MudLayout>
     <MudAppBar>
-        <MudText>
-            SoundTest
+        <MudText Typo="@Typo.h4">
+            Sound Test
         </MudText>
         <MudSpacer />
         <MudStack Row="@true">
-            <MudSwitch @bind-Checked="@isDarkMode"
+            <MudSwitch @bind-Value="@isDarkMode"
                        Color="Color.Primary"
                        Label="@(isDarkMode ? "Dark" : "Light")" />
             <MudButton Class="d-none d-md-flex"

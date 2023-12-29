@@ -2,6 +2,8 @@ namespace SoundTest.Components.Layout;
 
 public partial class MainLayout
 {
+    private const string AppTitle = "Sound Test";
+
     private bool isDarkMode;
     private MudThemeProvider? mudThemeProvider;
 

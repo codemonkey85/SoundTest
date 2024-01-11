@@ -1,4 +1,4 @@
 # SoundTest
 Just messing around.
 
-Hosted on Azure Static Web Apps: https://polite-wave-0e108230f.azurestaticapps.net/
+Hosted on GitHub Pages: [https://polite-wave-0e108230f.azurestaticapps.net/](https://codemonkey85.github.io/SoundTest/)https://codemonkey85.github.io/SoundTest/

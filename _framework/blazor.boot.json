@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "SoundTest",
   "resources": {
-    "hash": "sha256-qOiYtCcobW3W9eUsz7xUvNONcup7g5Cxy1NVihBZVuo=",
+    "hash": "sha256-rJKqOhw6+KnsXmbS2sqYckg7ifG29881Eq6mnJQ8ClI=",
     "jsModuleNative": {
       "dotnet.native.8.0.10.if7qrlu2oy.js": "sha256-kfWcvlnb2Okopejo8h7AZXkZ3qS3hDsRRiKa9iaBy24="
     },
@@ -30,7 +30,7 @@
       "Microsoft.JSInterop.wasm": "sha256-6PRNg56OO0degTMzexvEAt1jTQXpv8GAVbixIvWN/Ow=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-r/+bWAAxKn2+Wu3MRYDXvKEbHjLNuptflgNuNhQdK6w=",
       "MudBlazor.wasm": "sha256-pho12NhDl0xxIWnVqHI/Di5Pgme1oW8PPtmXpeIUG2k=",
-      "SoundTest.wasm": "sha256-zwVcZnWsSXp76lDyRSwLJ8KCyy064fUEPzy2TKFMao8=",
+      "SoundTest.wasm": "sha256-w5e+ucqfC/g23R0LkR57U4Y6qsxouogNZRTZns+ZzMU=",
       "System.Collections.Concurrent.wasm": "sha256-Oy6D8mASYS/tEGVEOo37jO0fK84UhSltYDjCsKxTP0Y=",
       "System.Collections.Immutable.wasm": "sha256-hDWDcy7F8F7pEGlkKtdkzkKRKqdmpHOW3EnLWV9vyUo=",
       "System.Collections.wasm": "sha256-2FOe/zzUI8840Vl/hbErihPOLvTnXs4IZDOyJGs8iNg=",

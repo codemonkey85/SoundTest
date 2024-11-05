@@ -2,7 +2,9 @@
     Sound Test
 </PageTitle>
 
-<MudContainer>
+<MudStack Spacing="3"
+          Class="mt-3">
+
     <MudSelect T="@Types"
                @bind-Value="@Type"
                Label="Sound Type">
@@ -11,33 +13,30 @@
             <MudSelectItem Value="t" />
         }
     </MudSelect>
-</MudContainer>
 
-<MudContainer>
     <MudSlider @bind-Value="@Frequency"
                Variant="@Variant.Filled"
                Min="@MinFrequency"
                Max="@MaxFrequency">
         Frequency = @Frequency.ToString()
     </MudSlider>
-</MudContainer>
 
-<MudContainer>
-    <MudButton Variant="@Variant.Filled"
-               Color="@Color.Primary"
-               OnClick="@(isPlaying ? StopPlaying : StartPlaying)">
-        @(isPlaying ? "Stop" : "Start")
-    </MudButton>
-    <MudButton Variant="@Variant.Filled"
-               Color="@Color.Secondary"
-               OnClick="@SetComfortableTone">
-        Comfortable Tone
-    </MudButton>
-</MudContainer>
+    <MudStack Row
+              Spacing="3">
+        <MudButton Variant="@Variant.Filled"
+                   Color="@Color.Primary"
+                   OnClick="@(isPlaying ? StopPlaying : StartPlaying)">
+            @(isPlaying ? "Stop" : "Start")
+        </MudButton>
+        <MudButton Variant="@Variant.Filled"
+                   Color="@Color.Secondary"
+                   OnClick="@SetComfortableTone">
+            Comfortable Tone
+        </MudButton>
+    </MudStack>
 
-@if (AudioDevices is { Count: > 0 })
-{
-    <MudContainer>
+    @if (AudioDevices is { Count: > 0 })
+    {
         <select @bind="@SelectedDeviceId"
                 @bind:after="@AudioDeviceChanged">
             @foreach (var device in AudioDevices)
@@ -60,10 +59,8 @@
                 }
             }
         </select>
-    </MudContainer>
-}
+    }
 
-<MudContainer>
     <MudTextField @bind-Value="@soundLink"
                   ReadOnly
                   Label="Sound Link"
@@ -71,4 +68,4 @@
                   Adornment="@Adornment.End"
                   AdornmentIcon="@Icons.Material.Filled.ContentCopy"
                   OnAdornmentClick=@CopySoundLink />
-</MudContainer>
+</MudStack>

@@ -1,9 +1,3 @@
-#pragma warning disable BL0007
-#pragma warning disable CS4014
-#pragma warning disable IDE0058
-
-using Microsoft.JSInterop;
-
 namespace SoundTest.Components;
 
 public partial class SoundComponent
@@ -22,18 +16,24 @@ public partial class SoundComponent
     private string? SelectedDeviceId { get; set; }
 
     [Parameter]
+#pragma warning disable BL0007 // Component parameters should be auto properties
     public Types Type
+#pragma warning restore BL0007 // Component parameters should be auto properties
     {
         get => type;
         set
         {
             type = value;
-            SetParametersAndUpdateAsync();
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            SetParametersAndUpdate();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
     }
 
     [Parameter]
+#pragma warning disable BL0007 // Component parameters should be auto properties
     public int Frequency
+#pragma warning restore BL0007 // Component parameters should be auto properties
     {
         get => frequency;
         set
@@ -44,13 +44,15 @@ public partial class SoundComponent
                 > MaxFrequency => MaxFrequency,
                 _ => value,
             };
-            SetParametersAndUpdateAsync();
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            SetParametersAndUpdate();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
     }
 
-    private async Task SetParametersAndUpdateAsync()
+    private async Task SetParametersAndUpdate()
     {
-        await SetParametersAsync();
+        await SetParameters();
         UpdateUri();
     }
 
@@ -74,8 +76,10 @@ public partial class SoundComponent
             {
                 await JSHost.ImportAsync("soundtest.js",
                     $"../{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
+
                 module = await JsRuntime.InvokeAsync<IJSObjectReference>(
                     "import", $"../{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
+
                 isJsInitialized = true;
 
                 //AudioDevices = await GetAudioOutputDevices();
@@ -87,7 +91,7 @@ public partial class SoundComponent
         }
     }
 
-    private async Task SetParametersAsync()
+    private async Task SetParameters()
     {
         if (!isJsInitialized)
         {
@@ -121,11 +125,11 @@ public partial class SoundComponent
         Snackbar.Add("Sound link copied to clipboard");
     }
 
-    private async Task SetComfortableToneAsync()
+    private async Task SetComfortableTone()
     {
         Type = Types.Sine;
         Frequency = 528;
-        await SetParametersAsync();
+        await SetParameters();
     }
 
     private async Task<List<AudioDevice>?> GetAudioOutputDevices()
@@ -195,12 +199,10 @@ public partial class SoundComponent
     {
         if (SelectedDeviceId is not null)
         {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             SetAudioDevice(SelectedDeviceId);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
     }
 
 }
-
-#pragma warning restore BL0007
-#pragma warning restore CS4014
-#pragma warning restore IDE0058

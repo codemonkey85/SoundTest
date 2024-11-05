@@ -3,7 +3,7 @@
 </PageTitle>
 
 <MudContainer>
-    <MudSelect T="Types"
+    <MudSelect T="@Types"
                @bind-Value="@Type"
                Label="Sound Type">
         @foreach (var t in Enum.GetValues<Types>())
@@ -15,7 +15,7 @@
 
 <MudContainer>
     <MudSlider @bind-Value="@Frequency"
-               Variant="Variant.Filled"
+               Variant="@Variant.Filled"
                Min="@MinFrequency"
                Max="@MaxFrequency">
         Frequency = @Frequency.ToString()
@@ -23,14 +23,14 @@
 </MudContainer>
 
 <MudContainer>
-    <MudButton Variant="Variant.Filled"
-               Color="Color.Primary"
+    <MudButton Variant="@Variant.Filled"
+               Color="@Color.Primary"
                OnClick="@(isPlaying ? StopPlaying : StartPlaying)">
         @(isPlaying ? "Stop" : "Start")
     </MudButton>
-    <MudButton Variant="Variant.Filled"
-               Color="Color.Secondary"
-               OnClick="SetComfortableToneAsync">
+    <MudButton Variant="@Variant.Filled"
+               Color="@Color.Secondary"
+               OnClick="@SetComfortableTone">
         Comfortable Tone
     </MudButton>
 </MudContainer>
@@ -38,14 +38,16 @@
 @if (AudioDevices is { Count: > 0 })
 {
     <MudContainer>
-        <select @bind="@SelectedDeviceId" @bind:after="@AudioDeviceChanged">
+        <select @bind="@SelectedDeviceId"
+                @bind:after="@AudioDeviceChanged">
             @foreach (var device in AudioDevices)
             {
                 if (device is { DeviceId: not null, Label: not null })
                 {
                     if (device.IsDefault is true)
                     {
-                        <option value="@device.DeviceId" selected>
+                        <option value="@device.DeviceId"
+                                selected>
                             @device.Label
                         </option>
                     }
@@ -63,10 +65,10 @@
 
 <MudContainer>
     <MudTextField @bind-Value="@soundLink"
-                  ReadOnly="@true"
+                  ReadOnly
                   Label="Sound Link"
-                  Variant="Variant.Outlined"
-                  Adornment="Adornment.End"
+                  Variant="@Variant.Outlined"
+                  Adornment="@Adornment.End"
                   AdornmentIcon="@Icons.Material.Filled.ContentCopy"
                   OnAdornmentClick=@CopySoundLink />
 </MudContainer>

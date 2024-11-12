@@ -1,6 +1,6 @@
 namespace SoundTest.Components;
 
-public partial class SoundComponent
+public partial class SoundComponent(IJSRuntime JsRuntime, ISnackbar Snackbar, NavigationManager Navigation)
 {
     private bool isPlaying = false;
     private string? soundLink;

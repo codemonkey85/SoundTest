@@ -80,8 +80,6 @@ public partial class SoundComponent(IJSRuntime jsRuntime, ISnackbar snackbar, Na
                     "import", $"../{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
 
                 isJsInitialized = true;
-
-                //AudioDevices = await GetAudioOutputDevices();
             }
             catch (Exception ex)
             {
@@ -129,61 +127,6 @@ public partial class SoundComponent(IJSRuntime jsRuntime, ISnackbar snackbar, Na
         Type = Types.Sine;
         Frequency = 528;
         await SetParameters();
-    }
-
-    private async Task<List<AudioDevice>?> GetAudioOutputDevices()
-    {
-        if (module is null)
-        {
-            return null;
-        }
-
-        var devices = (await module.GetAudioOutputDevices()).ToList();
-
-        devices = devices
-            .OrderBy(device => device.Label)
-            .ThenBy(device => device.GroupId)
-            .Except(devices.Where(device =>
-                device is { DeviceId: null } ||
-                device.DeviceId.Equals("communications", StringComparison.OrdinalIgnoreCase)))
-            .ToList();
-
-        var defaultGroupId = devices
-            .Where(device =>
-                device is { DeviceId: not null } &&
-                device.DeviceId.Equals("default", StringComparison.OrdinalIgnoreCase))
-            .Select(device => device.GroupId)
-            .FirstOrDefault();
-
-        devices = devices
-            .Except(devices.Where(device =>
-                device is { DeviceId: null } ||
-                device.DeviceId.Equals("default", StringComparison.OrdinalIgnoreCase)))
-            .ToList();
-
-        AudioDevice? defaultDevice = null;
-
-        foreach (var device in devices)
-        {
-            if (device is not { GroupId: not null } ||
-                !device.GroupId.Equals(defaultGroupId, StringComparison.OrdinalIgnoreCase))
-            {
-                continue;
-            }
-
-            defaultDevice = device;
-            break;
-        }
-
-        if (defaultDevice is null)
-        {
-            return devices;
-        }
-
-        var index = devices.IndexOf(defaultDevice);
-        devices[index] = devices[index] with { IsDefault = true };
-
-        return devices;
     }
 
     private async Task SetAudioDevice(string deviceId)

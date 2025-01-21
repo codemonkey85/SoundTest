@@ -1,5 +1,6 @@
 ﻿namespace SoundTest;
 
+// ReSharper disable once ClassNeverInstantiated.Global
 public partial class JsInterop
 {
     private const string JsFileName = "soundtest.js";
@@ -17,6 +18,7 @@ public partial class JsInterop
     public static partial void CopyTextToClipboard(string text);
 }
 
+// ReSharper disable once InconsistentNaming
 public static class IJSObjectReferenceExtensions
 {
     public static async Task<IEnumerable<AudioDevice>> GetAudioOutputDevices(this IJSObjectReference jsModule) =>

@@ -10,7 +10,7 @@
                Label="Sound Type">
         @foreach (var t in Enum.GetValues<Types>())
         {
-            <MudSelectItem Value="t" />
+            <MudSelectItem Value="t"/>
         }
     </MudSelect>
 
@@ -41,21 +41,23 @@
                 @bind:after="@AudioDeviceChanged">
             @foreach (var device in AudioDevices)
             {
-                if (device is { DeviceId: not null, Label: not null })
+                if (device is not { DeviceId: not null, Label: not null })
                 {
-                    if (device.IsDefault is true)
-                    {
-                        <option value="@device.DeviceId"
-                                selected>
-                            @device.Label
-                        </option>
-                    }
-                    else
-                    {
-                        <option value="@device.DeviceId">
-                            @device.Label
-                        </option>
-                    }
+                    continue;
+                }
+
+                if (device.IsDefault)
+                {
+                    <option value="@device.DeviceId"
+                            selected>
+                        @device.Label
+                    </option>
+                }
+                else
+                {
+                    <option value="@device.DeviceId">
+                        @device.Label
+                    </option>
                 }
             }
         </select>
@@ -67,5 +69,5 @@
                   Variant="@Variant.Outlined"
                   Adornment="@Adornment.End"
                   AdornmentIcon="@Icons.Material.Filled.ContentCopy"
-                  OnAdornmentClick=@CopySoundLink />
+                  OnAdornmentClick="@CopySoundLink"/>
 </MudStack>

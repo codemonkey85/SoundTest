@@ -1,6 +1,6 @@
 namespace SoundTest.Components;
 
-public partial class SoundComponent(IJSRuntime JsRuntime, ISnackbar Snackbar, NavigationManager Navigation)
+public partial class SoundComponent(IJSRuntime jsRuntime, ISnackbar snackbar, NavigationManager navigation)
 {
     private bool isPlaying = false;
     private string? soundLink;
@@ -58,10 +58,9 @@ public partial class SoundComponent(IJSRuntime JsRuntime, ISnackbar Snackbar, Na
 
     private void UpdateUri()
     {
-        var uri = Navigation.GetUriWithQueryParameters(new Dictionary<string, object?>()
+        var uri = navigation.GetUriWithQueryParameters(new Dictionary<string, object?>()
         {
-            [nameof(type)] = (int)type,
-            [nameof(frequency)] = frequency,
+            [nameof(type)] = (int)type, [nameof(frequency)] = frequency,
         });
         soundLink = uri;
     }
@@ -77,7 +76,7 @@ public partial class SoundComponent(IJSRuntime JsRuntime, ISnackbar Snackbar, Na
                 await JSHost.ImportAsync("soundtest.js",
                     $"../{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
 
-                module = await JsRuntime.InvokeAsync<IJSObjectReference>(
+                module = await jsRuntime.InvokeAsync<IJSObjectReference>(
                     "import", $"../{nameof(Components)}/{nameof(SoundComponent)}.razor.js");
 
                 isJsInitialized = true;
@@ -121,8 +120,8 @@ public partial class SoundComponent(IJSRuntime JsRuntime, ISnackbar Snackbar, Na
         }
 
         JsInterop.CopyTextToClipboard(soundLink);
-        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-        Snackbar.Add("Sound link copied to clipboard");
+        snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        snackbar.Add("Sound link copied to clipboard");
     }
 
     private async Task SetComfortableTone()
@@ -140,10 +139,6 @@ public partial class SoundComponent(IJSRuntime JsRuntime, ISnackbar Snackbar, Na
         }
 
         var devices = (await module.GetAudioOutputDevices()).ToList();
-        if (devices is null)
-        {
-            return null;
-        }
 
         devices = devices
             .OrderBy(device => device.Label)
@@ -170,18 +165,23 @@ public partial class SoundComponent(IJSRuntime JsRuntime, ISnackbar Snackbar, Na
 
         foreach (var device in devices)
         {
-            if (device is { GroupId: not null } && device.GroupId.Equals(defaultGroupId, StringComparison.OrdinalIgnoreCase))
+            if (device is not { GroupId: not null } ||
+                !device.GroupId.Equals(defaultGroupId, StringComparison.OrdinalIgnoreCase))
             {
-                defaultDevice = device;
-                break;
+                continue;
             }
+
+            defaultDevice = device;
+            break;
         }
 
-        if (defaultDevice is not null)
+        if (defaultDevice is null)
         {
-            var index = devices.IndexOf(defaultDevice);
-            devices[index] = devices[index] with { IsDefault = true };
+            return devices;
         }
+
+        var index = devices.IndexOf(defaultDevice);
+        devices[index] = devices[index] with { IsDefault = true };
 
         return devices;
     }
@@ -192,6 +192,7 @@ public partial class SoundComponent(IJSRuntime JsRuntime, ISnackbar Snackbar, Na
         {
             return;
         }
+
         await module.SetAudioDevice(deviceId);
     }
 
@@ -204,5 +205,4 @@ public partial class SoundComponent(IJSRuntime JsRuntime, ISnackbar Snackbar, Na
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
     }
-
 }

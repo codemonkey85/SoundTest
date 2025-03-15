@@ -10,6 +10,8 @@ public static class Constants
 
     public const int NeuroFrequency = 852;
 
+    public const decimal PerfectCFrequency = 261.63M; // C4
+
     public enum Types
     {
         Sine,

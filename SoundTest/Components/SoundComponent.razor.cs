@@ -136,6 +136,13 @@ public partial class SoundComponent(IJSRuntime jsRuntime, ISnackbar snackbar, Na
         await SetParameters();
     }
 
+    private async Task SetPerfectCTone()
+    {
+        Type = Types.Sine;
+        Frequency = (int)PerfectCFrequency;
+        await SetParameters();
+    }
+
     private async Task SetAudioDevice(string deviceId)
     {
         if (module is null)

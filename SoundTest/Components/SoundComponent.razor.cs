@@ -125,7 +125,14 @@ public partial class SoundComponent(IJSRuntime jsRuntime, ISnackbar snackbar, Na
     private async Task SetComfortableTone()
     {
         Type = Types.Sine;
-        Frequency = 528;
+        Frequency = ComfortableFrequency;
+        await SetParameters();
+    }
+
+    private async Task SetNeuroTone() 
+    {
+        Type = Types.Sine;
+        Frequency = NeuroFrequency;
         await SetParameters();
     }
 

@@ -33,6 +33,11 @@
                    OnClick="@SetComfortableTone">
             Comfortable Tone
         </MudButton>
+        <MudButton Variant="@Variant.Filled"
+                   Color="@Color.Secondary"
+                   OnClick="@SetNeuroTone">
+            Neuro Tone
+        </MudButton>
     </MudStack>
 
     @if (AudioDevices is { Count: > 0 })

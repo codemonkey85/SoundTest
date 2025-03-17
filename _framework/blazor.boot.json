@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "SoundTest",
   "resources": {
-    "hash": "sha256-PxoA9/dMeT9U85zF9BDXMbnh08vdlmhoK3CSj3y7WgY=",
+    "hash": "sha256-iRoGR3fdiFowMPiEhFRU3EY0MsfD+CIbHPmQKFipeKU=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Components.Forms.pl7ta3gmle.wasm": "Microsoft.AspNetCore.Components.Forms.wasm",
       "Microsoft.AspNetCore.Components.nrurdxtizb.wasm": "Microsoft.AspNetCore.Components.wasm",
@@ -20,8 +20,8 @@
       "Microsoft.Extensions.Primitives.9kx4ehp8td.wasm": "Microsoft.Extensions.Primitives.wasm",
       "Microsoft.JSInterop.uwoko85gn3.wasm": "Microsoft.JSInterop.wasm",
       "Microsoft.JSInterop.WebAssembly.s0bw0921jm.wasm": "Microsoft.JSInterop.WebAssembly.wasm",
-      "MudBlazor.9vce1gpni8.wasm": "MudBlazor.wasm",
-      "SoundTest.sua6i7hth6.wasm": "SoundTest.wasm",
+      "MudBlazor.ofjgime2a4.wasm": "MudBlazor.wasm",
+      "SoundTest.q6nj2jnny9.wasm": "SoundTest.wasm",
       "System.Collections.Concurrent.a5p27xsv4n.wasm": "System.Collections.Concurrent.wasm",
       "System.Collections.Immutable.qkselzef5f.wasm": "System.Collections.Immutable.wasm",
       "System.Collections.rg5s04mpa3.wasm": "System.Collections.wasm",
@@ -35,7 +35,7 @@
       "System.Linq.jo88ivs9q1.wasm": "System.Linq.wasm",
       "System.Memory.yqhy9cm4ez.wasm": "System.Memory.wasm",
       "System.ObjectModel.j9uxsudlin.wasm": "System.ObjectModel.wasm",
-      "System.Private.CoreLib.m1pz9s2rih.wasm": "System.Private.CoreLib.wasm",
+      "System.Private.CoreLib.bv557spdj3.wasm": "System.Private.CoreLib.wasm",
       "System.Private.Uri.d4s5iu9tjx.wasm": "System.Private.Uri.wasm",
       "System.Runtime.InteropServices.JavaScript.6mkbutfb3v.wasm": "System.Runtime.InteropServices.JavaScript.wasm",
       "System.Runtime.sqsr1ynhma.wasm": "System.Runtime.wasm",
@@ -44,7 +44,7 @@
       "System.Text.RegularExpressions.gikze157o3.wasm": "System.Text.RegularExpressions.wasm",
       "System.icunsnzrqy.wasm": "System.wasm",
       "dotnet.native.egqlmq2xle.js": "dotnet.native.js",
-      "dotnet.native.w6bqsq9hq7.wasm": "dotnet.native.wasm",
+      "dotnet.native.1t7umlabld.wasm": "dotnet.native.wasm",
       "dotnet.js": "dotnet.js",
       "dotnet.runtime.qrl1fuqt3c.js": "dotnet.runtime.js"
     },
@@ -55,10 +55,10 @@
       "dotnet.runtime.qrl1fuqt3c.js": "sha256-ilTXrnUF4HKbIAFVIYlRmX3ryKNZpGUObkWMF0n2Kcg="
     },
     "wasmNative": {
-      "dotnet.native.w6bqsq9hq7.wasm": "sha256-2DD7bFVMsCClbSrrPUtBZi/+sSfiF75OASyBqBy686g="
+      "dotnet.native.1t7umlabld.wasm": "sha256-+9LadPRRBPbuteHCxT/LVivcEBldO8qcpJP7gNg5Iu4="
     },
     "coreAssembly": {
-      "System.Private.CoreLib.m1pz9s2rih.wasm": "sha256-dh3RHtWh7LCgBAHlkK9vEAnqSE0EyQ/6gu5rs74zbqk=",
+      "System.Private.CoreLib.bv557spdj3.wasm": "sha256-CSz+0heNf9/STav586Vw8tEO2pIwXuvk+iAGm+JfBvE=",
       "System.Runtime.InteropServices.JavaScript.6mkbutfb3v.wasm": "sha256-Hl/7UOMhfXVBsrBTLzZuJEORL0MPnnv32/TE77j06Ag="
     },
     "assembly": {
@@ -79,8 +79,8 @@
       "Microsoft.Extensions.Primitives.9kx4ehp8td.wasm": "sha256-6cQKFBXogCgICQbWptUlzgW+xOHIWbUMRjFxztqytdA=",
       "Microsoft.JSInterop.uwoko85gn3.wasm": "sha256-4rxychFs1Q/C9kFtAVsOE7Bu/9HaV90BoOULfaYk/e8=",
       "Microsoft.JSInterop.WebAssembly.s0bw0921jm.wasm": "sha256-NNwR0xu2wKvvEIZnSUwKht+/0RJ9ziHW01M66VViIkI=",
-      "MudBlazor.9vce1gpni8.wasm": "sha256-pWkQBaIKewZW64NVvbbu81CcVBQgKXn8AGa0nCJg7oc=",
-      "SoundTest.sua6i7hth6.wasm": "sha256-dJoCpuSoEZwL7e56mCdyKl/6TCKXK29hZ3VkKc98BTs=",
+      "MudBlazor.ofjgime2a4.wasm": "sha256-nG8DctD6v5/8rb/3VqxWqw7D1MtXTxkspGBk1Ir1gNc=",
+      "SoundTest.q6nj2jnny9.wasm": "sha256-IprzFjoGScpoALHxo0Dz2tzAOlB7xJ9q08uywO4sLqE=",
       "System.Collections.Concurrent.a5p27xsv4n.wasm": "sha256-MgksW+NJadyiyI8emvLmH7ivFU8rFPhDRNiQabH01zg=",
       "System.Collections.Immutable.qkselzef5f.wasm": "sha256-KsniSxDPm65nnbHgIPvfnnmvqbQwfmIdLx1J+rpN9rc=",
       "System.Collections.rg5s04mpa3.wasm": "sha256-qzo0UW+8IRcnjoHqDhukS3u7FP4q8J4EZLS2j4w6Rvo=",

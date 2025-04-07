@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "SoundTest",
   "resources": {
-    "hash": "sha256-iRoGR3fdiFowMPiEhFRU3EY0MsfD+CIbHPmQKFipeKU=",
+    "hash": "sha256-jt9qfHLPfGre58eTI4t6WnSjg26g09yfk9Irqk2YTJU=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Components.Forms.pl7ta3gmle.wasm": "Microsoft.AspNetCore.Components.Forms.wasm",
       "Microsoft.AspNetCore.Components.nrurdxtizb.wasm": "Microsoft.AspNetCore.Components.wasm",
@@ -20,8 +20,8 @@
       "Microsoft.Extensions.Primitives.9kx4ehp8td.wasm": "Microsoft.Extensions.Primitives.wasm",
       "Microsoft.JSInterop.uwoko85gn3.wasm": "Microsoft.JSInterop.wasm",
       "Microsoft.JSInterop.WebAssembly.s0bw0921jm.wasm": "Microsoft.JSInterop.WebAssembly.wasm",
-      "MudBlazor.ofjgime2a4.wasm": "MudBlazor.wasm",
-      "SoundTest.q6nj2jnny9.wasm": "SoundTest.wasm",
+      "MudBlazor.0th3ulfaop.wasm": "MudBlazor.wasm",
+      "SoundTest.u3s9otsgm0.wasm": "SoundTest.wasm",
       "System.Collections.Concurrent.a5p27xsv4n.wasm": "System.Collections.Concurrent.wasm",
       "System.Collections.Immutable.qkselzef5f.wasm": "System.Collections.Immutable.wasm",
       "System.Collections.rg5s04mpa3.wasm": "System.Collections.wasm",
@@ -79,8 +79,8 @@
       "Microsoft.Extensions.Primitives.9kx4ehp8td.wasm": "sha256-6cQKFBXogCgICQbWptUlzgW+xOHIWbUMRjFxztqytdA=",
       "Microsoft.JSInterop.uwoko85gn3.wasm": "sha256-4rxychFs1Q/C9kFtAVsOE7Bu/9HaV90BoOULfaYk/e8=",
       "Microsoft.JSInterop.WebAssembly.s0bw0921jm.wasm": "sha256-NNwR0xu2wKvvEIZnSUwKht+/0RJ9ziHW01M66VViIkI=",
-      "MudBlazor.ofjgime2a4.wasm": "sha256-nG8DctD6v5/8rb/3VqxWqw7D1MtXTxkspGBk1Ir1gNc=",
-      "SoundTest.q6nj2jnny9.wasm": "sha256-IprzFjoGScpoALHxo0Dz2tzAOlB7xJ9q08uywO4sLqE=",
+      "MudBlazor.0th3ulfaop.wasm": "sha256-HMHA/R7fnNqR2WS8Jly99x1mTGfbkcGwQG4troNG7kk=",
+      "SoundTest.u3s9otsgm0.wasm": "sha256-dp1NxUWLu72JjSCUghDs6FvEzYo53DxCQ+j+WkxC0Mw=",
       "System.Collections.Concurrent.a5p27xsv4n.wasm": "sha256-MgksW+NJadyiyI8emvLmH7ivFU8rFPhDRNiQabH01zg=",
       "System.Collections.Immutable.qkselzef5f.wasm": "sha256-KsniSxDPm65nnbHgIPvfnnmvqbQwfmIdLx1J+rpN9rc=",
       "System.Collections.rg5s04mpa3.wasm": "sha256-qzo0UW+8IRcnjoHqDhukS3u7FP4q8J4EZLS2j4w6Rvo=",

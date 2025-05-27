@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "SoundTest",
   "resources": {
-    "hash": "sha256-EBFiPHYm/aKnx4/8+TFsaW9onk/eIjuI2MXx8PTRsFY=",
+    "hash": "sha256-aOszNhQjMvNAV8o34RR8oFKtYM3+LPMcp5MchfgCLZI=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Components.aptns81x8m.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Forms.sucst0e7xr.wasm": "Microsoft.AspNetCore.Components.Forms.wasm",
@@ -42,7 +42,7 @@
       "System.Text.RegularExpressions.xm2gsqk2m5.wasm": "System.Text.RegularExpressions.wasm",
       "System.ezrw3d5kw2.wasm": "System.wasm",
       "System.Private.CoreLib.37x8va6w8h.wasm": "System.Private.CoreLib.wasm",
-      "SoundTest.2yiqpo3bee.wasm": "SoundTest.wasm",
+      "SoundTest.zvtaauy9kx.wasm": "SoundTest.wasm",
       "dotnet.native.a75jxyi3v8.js": "dotnet.native.js",
       "dotnet.native.j0w0suth7g.wasm": "dotnet.native.wasm",
       "dotnet.js": "dotnet.js",
@@ -99,7 +99,7 @@
       "System.Text.Json.ru1b2o2nhe.wasm": "sha256-3Z+WxonubmLE3ltT9yRspRggt3GrZgJHKRfMyEjSV84=",
       "System.Text.RegularExpressions.xm2gsqk2m5.wasm": "sha256-p4r+hs4jgtmFZsgNMgfZB1XAyK1YyqVqjw6N3KiyRZI=",
       "System.ezrw3d5kw2.wasm": "sha256-ViNRvhyxlTugIlqJHamw/HwbXlg/YWcrANmxuTM0tfg=",
-      "SoundTest.2yiqpo3bee.wasm": "sha256-auuilb+mXo5E0yqpZ9uILM7yLQ8+NIrL0MLBuRpxjGE="
+      "SoundTest.zvtaauy9kx.wasm": "sha256-z5efmVQGRxJ9xw6SiIwMQs3Kk9Gb7HLsBnDu/4WNua8="
     }
   },
   "cacheBootResources": true,

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
@@ -9,6 +9,7 @@
 		<InvariantGlobalization>true</InvariantGlobalization>
 		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
@@ -16,9 +17,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.10" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.10" PrivateAssets="all" />
-		<PackageReference Include="MudBlazor" Version="8.13.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.0" PrivateAssets="all" />
+		<PackageReference Include="MudBlazor" Version="8.14.0" />
 	</ItemGroup>
 
 	<ItemGroup>

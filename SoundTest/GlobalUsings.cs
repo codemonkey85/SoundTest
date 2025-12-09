@@ -1,0 +1,12 @@
+﻿global using Microsoft.AspNetCore.Components;
+global using Microsoft.AspNetCore.Components.Web;
+global using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+global using Microsoft.JSInterop;
+global using MudBlazor;
+global using MudBlazor.Services;
+global using SoundTest.Layout;
+global using SoundTest.Pages;
+global using System.Diagnostics;
+global using System.Runtime.InteropServices.JavaScript;
+global using static SoundTest.Constants;
+global using SoundTest;

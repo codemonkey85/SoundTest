@@ -1,12 +1,12 @@
 self.assetsManifest = {
-  "version": "7bXNHaXV",
+  "version": "fVYwxKce",
   "assets": [
     {
       "hash": "sha256-5Po0Euf5C31m6+6UY2CQDAsX4s/ja4XWTXduUgm+GoM=",
       "url": "Components/SoundComponent.razor.js"
     },
     {
-      "hash": "sha256-ZzHmYioOIMEX9F8thiw1Sc+cGGFHLtMWI4q4uvO13CQ=",
+      "hash": "sha256-KGcaExjPdLVQUK4LLvcVezhWrWHUpbcKNRc2A3KmGPU=",
       "url": "_content/MudBlazor/MudBlazor.min.css"
     },
     {
@@ -82,12 +82,12 @@ self.assetsManifest = {
       "url": "_framework/Microsoft.JSInterop.owc4gvpwf2.wasm"
     },
     {
-      "hash": "sha256-+HtpOFhJJpAHFic01nd12dM7Hn5EzrGv0S5xfza3mtA=",
-      "url": "_framework/MudBlazor.ocnbhsxagp.wasm"
+      "hash": "sha256-mvfLEHep31BbjQvgWYwPs1OMKsC4Qbzkd1XY0e5+9R0=",
+      "url": "_framework/MudBlazor.iqahfew94d.wasm"
     },
     {
-      "hash": "sha256-/7MSBkkjz4cJMQhXsV3ek6kgW6pV2FFnUugXslHFvcI=",
-      "url": "_framework/SoundTest.b19x020vw3.wasm"
+      "hash": "sha256-iBUNLef+rVNsCXA5gwnmeHwAkXhQvsiNJ8+0uMRl1IE=",
+      "url": "_framework/SoundTest.8k36uwa7ha.wasm"
     },
     {
       "hash": "sha256-hwzkIsTs+DaOEczaFRP3loSauz8RukKdN2Iglxdu67I=",
@@ -186,7 +186,7 @@ self.assetsManifest = {
       "url": "_framework/blazor.webassembly.js"
     },
     {
-      "hash": "sha256-hkBecqkBz5ChmIpptv6ATafT3j9oPwHAYSfDU7BfDDc=",
+      "hash": "sha256-lJLuDDtL+9IaLySNOk9mGJDd0FU/nfbTVZW+nXxm4d4=",
       "url": "_framework/dotnet.js"
     },
     {
@@ -214,7 +214,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-W6TpyC98gh0DqPC8vA1rOp4LYrYHB2ZsWafUS1hW5uI=",
+      "hash": "sha256-2s1Xs75FEbCK6ItR1+64xrQxK45bfOHVb0eB7h+T2b0=",
       "url": "index.html"
     },
     {

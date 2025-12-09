@@ -9,7 +9,6 @@
         <InvariantGlobalization>true</InvariantGlobalization>
         <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Debug'">

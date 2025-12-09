@@ -1,6 +1,6 @@
 {
-  "name": "SoundTest",
-  "short_name": "SoundTest",
+  "name": "Sound Test",
+  "short_name": "Sound Test",
   "id": "./",
   "start_url": "./",
   "display": "standalone",

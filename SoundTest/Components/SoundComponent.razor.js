@@ -42,14 +42,14 @@ export async function GetAudioOutputDevices() {
     devices = (await navigator.mediaDevices.enumerateDevices()).filter(function (entry) {
         return entry.kind === 'audiooutput' && entry.deviceId !== null && entry.deviceId !== "";
     });
-    ;
+
 
     if (devices === null || devices.length === 0) {
-        await navigator.mediaDevices.getUserMedia({ audio: true });
+        await navigator.mediaDevices.getUserMedia({audio: true});
         devices = (await navigator.mediaDevices.enumerateDevices()).filter(function (entry) {
             return entry.kind === 'audiooutput' && entry.deviceId !== null && entry.deviceId !== "";
         });
-        ;
+
     }
 
     return devices;

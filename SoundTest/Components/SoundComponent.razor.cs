@@ -2,11 +2,11 @@
 
 public partial class SoundComponent(IJSRuntime jsRuntime, ISnackbar snackbar, NavigationManager navigation)
 {
+    private bool isJsInitialized;
     private bool isPlaying;
-    private string? soundLink;
 
     private IJSObjectReference? module;
-    private bool isJsInitialized;
+    private string? soundLink;
 
     private List<AudioDevice>? AudioDevices { get; set; }
 
@@ -33,7 +33,7 @@ public partial class SoundComponent(IJSRuntime jsRuntime, ISnackbar snackbar, Na
             {
                 < MinFrequency => MinFrequency,
                 > MaxFrequency => MaxFrequency,
-                _ => value,
+                _ => value
             };
             _ = SetParametersAndUpdate();
         }
@@ -47,7 +47,7 @@ public partial class SoundComponent(IJSRuntime jsRuntime, ISnackbar snackbar, Na
 
     private void UpdateUri()
     {
-        var uri = navigation.GetUriWithQueryParameters(new Dictionary<string, object?>() { [nameof(Type)] = (int)Type, [nameof(Frequency)] = Frequency, });
+        var uri = navigation.GetUriWithQueryParameters(new Dictionary<string, object?> { [nameof(Type)] = (int)Type, [nameof(Frequency)] = Frequency });
         soundLink = uri;
     }
 

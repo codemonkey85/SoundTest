@@ -1,7 +1,7 @@
-var context = null;
-var osc = null;
-var oscType = null;
-var oscFreq = null;
+let context = null;
+let osc = null;
+let oscType = null;
+let oscFreq = null;
 
 export function SetParameters(type = "sine", frequency = 440) {
     oscType = type ?? "sine";
@@ -37,7 +37,7 @@ export function CopyTextToClipboard(textToCopy) {
 }
 
 export async function GetAudioOutputDevices() {
-    var devices = [];
+    let devices = [];
 
     devices = (await navigator.mediaDevices.enumerateDevices()).filter(function (entry) {
         return entry.kind === 'audiooutput' && entry.deviceId !== null && entry.deviceId !== "";

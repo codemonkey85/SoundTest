@@ -1,4 +1,4 @@
-namespace SoundTest.Components.Pages;
+namespace SoundTest.Pages;
 
 public partial class Home
 {

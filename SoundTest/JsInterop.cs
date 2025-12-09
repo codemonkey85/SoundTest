@@ -21,11 +21,14 @@ public partial class JsInterop
 // ReSharper disable once InconsistentNaming
 public static class IJSObjectReferenceExtensions
 {
-    public static async Task<IEnumerable<AudioDevice>> GetAudioOutputDevices(this IJSObjectReference jsModule) =>
-        await jsModule.InvokeAsync<IEnumerable<AudioDevice>>(nameof(GetAudioOutputDevices));
+    extension(IJSObjectReference jsModule)
+    {
+        public async Task<IEnumerable<AudioDevice>> GetAudioOutputDevices() =>
+            await jsModule.InvokeAsync<IEnumerable<AudioDevice>>(nameof(GetAudioOutputDevices));
 
-    public static async Task SetAudioDevice(this IJSObjectReference jsModule, string deviceId) =>
-        await jsModule.InvokeVoidAsync(nameof(SetAudioDevice), deviceId);
+        public async Task SetAudioDevice(string deviceId) =>
+            await jsModule.InvokeVoidAsync(nameof(SetAudioDevice), deviceId);
+    }
 }
 
 public record AudioDevice(string? DeviceId, string? Label, string? GroupId, bool IsDefault);

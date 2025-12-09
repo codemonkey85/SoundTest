@@ -2,51 +2,40 @@ namespace SoundTest.Components;
 
 public partial class SoundComponent(IJSRuntime jsRuntime, ISnackbar snackbar, NavigationManager navigation)
 {
-    private bool isPlaying = false;
+    private bool isPlaying;
     private string? soundLink;
 
-    private Types type;
-    private int frequency;
-
     private IJSObjectReference? module;
-    private bool isJsInitialized = false;
+    private bool isJsInitialized;
 
     private List<AudioDevice>? AudioDevices { get; set; }
 
     private string? SelectedDeviceId { get; set; }
 
     [Parameter]
-#pragma warning disable BL0007 // Component parameters should be auto properties
     public Types Type
-#pragma warning restore BL0007 // Component parameters should be auto properties
     {
-        get => type;
+        get;
         set
         {
-            type = value;
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            SetParametersAndUpdate();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            field = value;
+            _ = SetParametersAndUpdate();
         }
     }
 
     [Parameter]
-#pragma warning disable BL0007 // Component parameters should be auto properties
     public int Frequency
-#pragma warning restore BL0007 // Component parameters should be auto properties
     {
-        get => frequency;
+        get;
         set
         {
-            frequency = value switch
+            field = value switch
             {
                 < MinFrequency => MinFrequency,
                 > MaxFrequency => MaxFrequency,
                 _ => value,
             };
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            SetParametersAndUpdate();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            _ = SetParametersAndUpdate();
         }
     }
 
@@ -58,10 +47,7 @@ public partial class SoundComponent(IJSRuntime jsRuntime, ISnackbar snackbar, Na
 
     private void UpdateUri()
     {
-        var uri = navigation.GetUriWithQueryParameters(new Dictionary<string, object?>()
-        {
-            [nameof(type)] = (int)type, [nameof(frequency)] = frequency,
-        });
+        var uri = navigation.GetUriWithQueryParameters(new Dictionary<string, object?>() { [nameof(Type)] = (int)Type, [nameof(Frequency)] = Frequency, });
         soundLink = uri;
     }
 
@@ -129,7 +115,7 @@ public partial class SoundComponent(IJSRuntime jsRuntime, ISnackbar snackbar, Na
         await SetParameters();
     }
 
-    private async Task SetNeuroTone() 
+    private async Task SetNeuroTone()
     {
         Type = Types.Sine;
         Frequency = NeuroFrequency;
@@ -157,9 +143,7 @@ public partial class SoundComponent(IJSRuntime jsRuntime, ISnackbar snackbar, Na
     {
         if (SelectedDeviceId is not null)
         {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            SetAudioDevice(SelectedDeviceId);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            _ = SetAudioDevice(SelectedDeviceId);
         }
     }
 }

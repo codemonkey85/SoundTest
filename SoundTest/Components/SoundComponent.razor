@@ -51,8 +51,8 @@
 
     @if (AudioDevices is { Count: > 0 })
     {
-        <select @bind="@SelectedDeviceId"
-                @bind:after="@AudioDeviceChanged">
+        <MudSelect @bind-Value="@SelectedDeviceId"
+                   @bind-Value:after="@AudioDeviceChanged">
             @foreach (var device in AudioDevices)
             {
                 if (device is not { DeviceId: not null, Label: not null })
@@ -62,19 +62,19 @@
 
                 if (device.IsDefault)
                 {
-                    <option value="@device.DeviceId"
-                            selected>
+                    <MudSelectItem value="@device.DeviceId"
+                                   selected>
                         @device.Label
-                    </option>
+                    </MudSelectItem>
                 }
                 else
                 {
-                    <option value="@device.DeviceId">
+                    <MudSelectItem value="@device.DeviceId">
                         @device.Label
-                    </option>
+                    </MudSelectItem>
                 }
             }
-        </select>
+        </MudSelect>
     }
 
     <MudTextField @bind-Value="@soundLink"

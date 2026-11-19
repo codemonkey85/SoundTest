@@ -23,11 +23,29 @@ public static class IJSObjectReferenceExtensions
 {
     extension(IJSObjectReference jsModule)
     {
-        public async Task<IEnumerable<AudioDevice>> GetAudioOutputDevices() =>
-            await jsModule.InvokeAsync<IEnumerable<AudioDevice>>(nameof(GetAudioOutputDevices));
+        public async Task<IEnumerable<AudioDevice>> GetAudioOutputDevices()
+        {
+            try
+            {
+                return await jsModule.InvokeAsync<IEnumerable<AudioDevice>>(nameof(GetAudioOutputDevices));
+            }
+            catch (Microsoft.JSInterop.JSException ex)
+            {
+                throw new InvalidOperationException("Unable to enumerate audio output devices.", ex);
+            }
+        }
 
-        public async Task SetAudioDevice(string deviceId) =>
-            await jsModule.InvokeVoidAsync(nameof(SetAudioDevice), deviceId);
+        public async Task SetAudioDevice(string deviceId)
+        {
+            try
+            {
+                await jsModule.InvokeVoidAsync(nameof(SetAudioDevice), deviceId);
+            }
+            catch (Microsoft.JSInterop.JSException ex)
+            {
+                throw new InvalidOperationException("Unable to select the audio output device.", ex);
+            }
+        }
     }
 }
 
